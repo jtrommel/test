@@ -1,0 +1,124 @@
+\documentclass{tufte-book}
+\usepackage{graphicx}  % werken met figuren
+\usepackage{gensymb} % werken met wetenschappelijke eenheden\usepackage{geometry}
+\usepackage{changepage} % http://ctan.org/pkg/changepage
+\usepackage[dutch,british]{babel} % instelling van de taal (woordsplitsing, spellingscontrole)
+\usepackage[parfill]{parskip} % Paragrafen gescheiden door witte lijn en geen inspringing
+\usepackage[font=small,skip=3pt]{caption} % Minder ruimte tussen figuur/table en ondertitel. Ondertitel klein
+\usepackage{capt-of}
+\usepackage{indentfirst}
+\setlength{\parindent}{0.7cm}
+\usepackage{enumitem} % Laat enumerate werken met letters
+\usepackage{url}
+\usepackage{lipsum}
+\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+% Prints a trailing space in a smart way.
+\usepackage{xspace}
+\usepackage{hyperref}
+\usepackage{amsmath}
+
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+
+% Alter some LaTeX defaults for better treatment of figures:
+% See p.105 of "TeX Unbound" for suggested values.
+% See pp. 199-200 of Lamport's "LaTeX" book for details.
+%   General parameters, for ALL pages:
+    \renewcommand{\topfraction}{0.9}	% max fraction of floats at top
+    \renewcommand{\bottomfraction}{0.9}	% max fraction of floats at bottom
+%   Parameters for TEXT pages (not float pages):
+    \setcounter{topnumber}{2}
+    \setcounter{bottomnumber}{2}
+    \setcounter{totalnumber}{4}     % 2 may work better
+    \renewcommand{\textfraction}{0.1}	% allow minimal text w. figs
+%   Parameters for FLOAT pages (not text pages):
+    \renewcommand{\floatpagefraction}{0.8}	% require fuller float pages
+% N.B.: floatpagefraction MUST be less than topfraction !!
+\setcounter{secnumdepth}{3}
+
+\newcommand{\tthdump}[1]{#1}
+\usepackage{makeidx}
+\makeindex
+
+\title{Tufte-style document}
+\author{Jan Trommelmans}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE,prefix.string=Tuf}
+\setkeys{Gin}{width=1.1\marginparwidth} %% Sweave
+
+\frontmatter
+
+\maketitle
+
+\chapter*{Inleiding}
+
+Hier komt de inleiding
+
+\mainmatter
+
+\chapter{Het eerste hoofdstuk van het boek}
+
+\section{Where I get both funky and fresh}
+
+<<make some randomness>>=
+  set.seed(12)
+  t <- rnorm(100)
+@
+and an example plot
+
+<<label=density,fig=TRUE,include=FALSE, echo=FALSE>>=
+plot(density(t))
+@
+
+\begin{center}
+\includegraphics[width=1\textwidth]{Tuf-density}
+\captionof{figure}{Density plot}
+\label{fig:Tuf-density}
+\end{center}
+
+\begin{marginfigure}
+\includegraphics[width=1\textwidth]{Tuf-density}
+\captionof{figure}{Density plot}
+\label{fig:Tuf-densitybis}
+\end{marginfigure}
+
+\subsection{Something else}
+
+Hier komt vanalles te staan in subsection.
+
+\paragraph{Paragraafniveau}
+
+Paragraafniveau \url{http://www.latextemplates.com/templates/books/1/book_1_documentation.pdf}
+
+This is a very simple example\footnote{hier kan je een uitleg schrijven die in de marge komt} of how we might get started with Sweave. You know what comes next, right? That's right... Lorem Ipsum, ladies! 
+
+\newthought{In den beginne was} het woord. Voorbeeld van een sidenote: \sidenote[1][2cm]{Sidenote text.}
+
+Nu een voorbeeld van een marginnote: \marginnote[-1cm]{Een tekst in de marge van de hoofd-tekst.}
+
+Voorbeeld van de figure*-environment die de volledige bladbreedte gebruikt, marge incl.
+
+\begin{figure*}
+\includegraphics[width=1.2\textwidth]{Tuf-density}
+\captionof{figure}{Density plot}
+\label{fig:Tuf-densitybis}
+\end{figure*}
+
+Voorbeeld van de figure-environment:
+\begin{figure}
+\includegraphics[width=0.7\textwidth]{Tuf-density}
+\captionof{figure}{Density plot}
+\label{fig:Tuf-densitybis}
+\end{figure}
+
+Voorbeeld van de caption mogelijkheden:
+\begin{marginfigure}
+\includegraphics[width=1\textwidth]{Tuf-density}
+\caption{This is an example of a sine wave.}
+\label{fig:Tuf-densitybis}
+\setfloatalignment{b}% forces caption to be bottom-aligned
+\end{marginfigure}
+
+\lipsum
+
+\end{document}
